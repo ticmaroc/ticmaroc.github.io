@@ -1,5 +1,6 @@
 var numComments = numComments || 5,
     avatarSize = avatarSize || 60,
+    characters = characters || 40,
     showAvatar = typeof showAvatar === "undefined" ? true : showAvatar,
     roundAvatar = typeof roundAvatar === "undefined" ? true : roundAvatar;
 
@@ -18,7 +19,7 @@ function w2b_recent_comments(h) {
             }
         c = b.author[0].name.$t;
         a = b.author[0].gd$image.src;
-        if (a.indexOf("/s512-c/") != -1) a = a.replace("/s512-c/", "/s" + avatarSize + "-c/");
+       if (a.indexOf("/s512-c/") != -1) a = a.replace("/s512-c/", "/s" + avatarSize + "-c/");
 		else if (a.indexOf("blogblog.com/img/b16-rounded.gif") != -1) a = "http://3.bp.blogspot.com/-AaI8-1X32ZM/TxMKLVzQ5BI/AAAAAAAABYY/QYau8ov2blE/s" + avatarSize + "/w2b_blogger_logo.png";
          else if (a.indexOf("blogblog.com/img/blank.gif") != -1) a = "http://3.bp.blogspot.com/-AaI8-1X32ZM/TxMKLVzQ5BI/AAAAAAAABYY/QYau8ov2blE/s" + avatarSize + "/w2b_blogger_logo.png";
         if (showAvatar === true) {
@@ -26,6 +27,10 @@ function w2b_recent_comments(h) {
             d += '<div class="avatarImage ' + g + '"><img class="' + g + '" src="' + a + '" alt="' + c + '" width="' + avatarSize + '" height="' + avatarSize + '"/></div>'
         }
         d += '<a href="' + f + '">' + c + "</a>";
+        b = b.content.$t.replace(/(<([^>]+)>)/ig, "");
+        if (b !== "" && b.length > characters) {
+            b = b.substring(0, characters);
+            b += "…" }
         d += "<span>" + b + "</span>";
         d += "</li>"
     }
