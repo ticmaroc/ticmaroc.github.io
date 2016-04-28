@@ -1,9 +1,7 @@
 var numComments = numComments || 5,
     avatarSize = avatarSize || 60,
     characters = characters || 40,
-    moreLinktext = moreLinktext || " More »",
     showAvatar = typeof showAvatar === "undefined" ? true : showAvatar,
-    showMorelink = typeof showMorelink === "undefined" ? false : showMorelink,
     roundAvatar = typeof roundAvatar === "undefined" ? true : roundAvatar;
 
 function w2b_recent_comments(h) {
@@ -32,9 +30,8 @@ function w2b_recent_comments(h) {
         b = b.content.$t.replace(/(<([^>]+)>)/ig, "");
         if (b !== "" && b.length > characters) {
             b = b.substring(0, characters);
-            b += "…";
-            if (showMorelink === true) b += '<a href="' + f + '">' + moreLinktext + "</a>"
-        }
+            b += "…"
+			}
         d += "<span>" + b + "</span>";
         d += "</li>"
     }
