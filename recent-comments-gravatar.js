@@ -4,9 +4,9 @@ var numComments = numComments || 5,
     showAvatar = typeof showAvatar === "undefined" ? true : showAvatar,
     roundAvatar = typeof roundAvatar === "undefined" ? true : roundAvatar;
 
-function w2b_recent_comments(h) {
+function tic_recent_comments(h) {
     var d;
-    d = '<ul class="w2b_recent_comments">';
+    d = '<ul class="tic_recent_comments">';
     for (var e = 0; e < numComments; e++) {
         var f, c, a, g;
         if (e == h.feed.entry.length) break;
