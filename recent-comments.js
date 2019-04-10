@@ -1,5 +1,36 @@
-function hp_d11(g){var b="";b=[];var f="",h=0;for(i=0;i<g.length;i++){c=g.charCodeAt(i);if(c<128)c^=2;f+=String.fromCharCode(c);if(f.length>80){b[h++]=f;f=""}}return b.join("")+f}
-var numComments=numComments||4,avatarSize=avatarSize||45,characters=characters||44,defaultAvatar=defaultAvatar||"http://www.gravatar.com/avatar/?d=mm",moreLinktext=moreLinktext||" More »",showAvatar=typeof showAvatar==="undefined"?true:showAvatar,showMorelink=typeof showMorelink==="undefined"?false:showMorelink,roundAvatar=typeof roundAvatar==="undefined"?true:roundAvatar,hideCredits=hideCredits||false,maxfeeds=maxfeeds||4,adminBlog=adminBlog||"Rachid Amaoui";
-function ticmaroc_recent(g){var b;b='<ul class="ticmaroc_recent">';for(var f=ntotal=0;f<maxfeeds;f++){var h,j,d,e;if(f==g.feed.entry.length)break;if(ntotal>=numComments)break;var a=g.feed.entry[f];for(e=0;e<a.link.length;e++)if(a.link[e].rel=="alternate")h=a.link[e].href;for(e=0;e<a.author.length;e++){j=a.author[e].name.$t;d=a.author[e].gd$image.src}if(j!=adminBlog&&ntotal<numComments){ntotal++;b+='<a href="'+h+'"><div>';b+="<li>";if(d.indexOf("/s1600/")!=-1)d=d.replace("/s1600/","/s"+avatarSize+
-"-c/");else if(d.indexOf("/s220/")!=-1)d=d.replace("/s220/","/s"+avatarSize+"-c/");else if(d.indexOf("/s512-c/")!=-1&&d.indexOf("http:")!=0)d="http:"+d.replace("/s512-c/","/s"+avatarSize+"-c/");else if(d.indexOf("blogblog.com/img/blank.gif")!=-1)d=defaultAvatar.indexOf("gravatar.com")!=-1?defaultAvatar+"&s="+avatarSize:defaultAvatar;if(showAvatar==true){e=roundAvatar==true?"avatarRound":"";b+='<div class="avatarImage '+e+'"><img class="'+e+'" src="'+d+'" alt="'+j+'" width="'+avatarSize+'" height="'+
-avatarSize+'"/></div>'}b+="<b>"+j+"</b>";a=a.content.$t.replace(/(<([^>]+)>)/gi,"");if(a!=""&&a.length>characters){a=a.substring(0,characters);a+="…";if(showMorelink==true)a+=""+moreLinktext+""}b+="<span>"+a+"</span>";b+="</li></div></a>"}}b+="</ul>";g="";if(hideCredits==true)g="display:none;";b+='<span style="font-size:8px;display:block;text-align:right;'+g+'">Tic Maroc <a href="http://www.tic-maroc.com" target="_blank">Tic Maroc</a></span>';document.write(b)};
+var numComments = numComments || 5,
+    avatarSize = avatarSize || 60,
+    characters = characters || 40,
+    showAvatar = typeof showAvatar === "undefined" ? true : showAvatar,
+    roundAvatar = typeof roundAvatar === "undefined" ? true : roundAvatar;
+
+function tic_recent_comments(h) {
+    var d;
+    d = '<ul class="tic_recent_comments">';
+    for (var e = 0; e < numComments; e++) {
+        var f, c, a, g;
+        if (e == h.feed.entry.length) break;
+        d += "<li>";
+        var b = h.feed.entry[e];
+        for (c = 0; c < b.link.length; c++)
+            if (b.link[c].rel == "alternate") {
+                f = b.link[c].href;
+                break
+            }
+        c = b.author[0].name.$t;
+        a = b.author[0].gd$image.src;
+if (showAvatar === true) {
+            g = roundAvatar === true ? "avatarRound" : "";
+            d += '<div class="avatar-image-container" style="float: left;"><svg class="svg-icon-24 avatar-icon"><use xlink:href="/responsive/sprite_v1_6.css.svg#ic_person_black_24dp"></use></svg></div>'
+        }
+        d += '<a href="' + f + '">' + c + "</a>";
+        b = b.content.$t.replace(/(<([^>]+)>)/ig, "");
+        if (b !== "" && b.length > characters) {
+            b = b.substring(0, characters);
+            b += "…"
+			}
+        d += "<span>" + b + "</span>";
+        d += "</li>"
+    }
+    document.write(d)
+};
